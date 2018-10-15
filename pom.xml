@@ -219,8 +219,10 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-                <- webroots在此插件中不能自定义，使用下面的war插件才可以自定义 ->
             </plugin>-->
+
+            <!-- webroots在上面插件中不能自定义，使用下面的war插件才可以自定义 -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
