@@ -6,7 +6,234 @@
 
     <groupId>com.java</groupId>
     <artifactId>MyBlog</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
+    <name>blog</name>
+    <properties>
+        <fastjson.version>1.1.41</fastjson.version>
+        <springVersion>4.3.1.RELEASE</springVersion>
+        <hibernateVersion>4.3.5.Final</hibernateVersion>
+        <jstlVersion>1.2</jstlVersion>
+        <taglibVersion>1.1.2</taglibVersion>
+        <servletVersion>3.0-alpha-1</servletVersion>
+        <jsonVersion>1.9.13</jsonVersion>
+        <jacksonVersion>2.5.0</jacksonVersion>
+        <mysqlVersion>5.1.38</mysqlVersion>
+        <c3p0Version>0.9.1.2</c3p0Version>
+        <log4jVersion>1.2.17</log4jVersion>
+        <fileuploadVersion>1.3.1</fileuploadVersion>
+        <lombokVersion>1.16.10</lombokVersion>
+        <swagger.version>1.5.8</swagger.version>
+        <io.springfox.version>2.5.0</io.springfox.version>
+        <aspectj.version>1.6.11</aspectj.version>
+        <junit.version>4.11</junit.version>
 
+        <cxf.version>2.2.3</cxf.version>
+
+        <spring.version>3.2.3.RELEASE</spring.version>
+
+    </properties>
+
+    <dependencies>
+
+
+        <!-- spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+
+        <!-- spring web + spring MVC-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+
+        <!-- hibernate配置-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernateVersion}</version>
+        </dependency>
+
+        <!-- hibernate 缓存, 视情况添加-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernateVersion}</version>
+        </dependency>
+
+        <!-- jsp页面使用的jstl支持-->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstlVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>${taglibVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servletVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- DataBase数据库连接 mysql包-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysqlVersion}</version>
+        </dependency>
+
+        <!-- 数据库连接池-->
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>${c3p0Version}</version>
+        </dependency>
+
+
+        <!-- log4j配置, 视情况添加-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4jVersion}</version>
+        </dependency>
+
+
+        <!-- lombok插件导包-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombokVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--阿里巴巴json-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- swagger-mvc  start -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.6.5</version>
+        </dependency>
+        <!--swagger  end -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <!--使用AspectJ方式注解需要相应的包-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency><groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.5-FINAL</version>
+        </dependency>
+
+
+        <!-- CXF Dependencies -->
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <!-- Jetty is needed if you're are not using the CXFServlet -->
+
+
+
+        <!-- End of CXF Dependencies -->
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+                <- webroots在此插件中不能自定义，使用下面的war插件才可以自定义 ->
+            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>web</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
