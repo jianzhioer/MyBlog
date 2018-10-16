@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx.xsd
+						http://cxf.apache.org/jaxws
+						http://cxf.apache.org/schemas/jaxws.xsd">
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.lxf.blog">
+        <!-- 扫描时跳过 @Controller 注解的JAVA类（控制器） -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--********************************************配置hibernate********************************************-->
+
+    <!--扫描配置文件(这里指向的是之前配置的那个config.properties)-->
+    <context:property-placeholder location="classpath:/config.properties" />
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}" />  <!--数据库连接驱动-->
+        <property name="jdbcUrl" value="${jdbc.url}" />     <!--数据库地址-->
+        <property name="user" value="${jdbc.username}" />   <!--用户名-->
+        <property name="password" value="${jdbc.password}" />   <!--密码-->
+        <property name="maxPoolSize" value="40" />      <!--最大连接数-->
+        <property name="minPoolSize" value="1" />       <!--最小连接数-->
+        <property name="initialPoolSize" value="10" />      <!--初始化连接池内的数据库连接-->
+        <property name="maxIdleTime" value="10" />  <!--最大空闲时间-->
+    </bean>
+
+    <!--配置session工厂-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.lxf.blog" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> <!--hibernate根据实体自动生成数据库表-->
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>   <!--指定数据库方言-->
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>     <!--在控制台显示执行的数据库操作语句-->
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>     <!--在控制台显示执行的数据库操作语句（格式）-->
+                <!--<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>-->
+            </props>
+
+        </property>
+
+
+    </bean>
+    <!-- 配置HibernateTemplate模板 -->
+    <bean name="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" >
+        <property name="sessionFactory" ref="sessionFactory" ></property>
+    </bean>
+
+    <!-- crm客户端配置 -->
+    <!--<jaxws:client id="customerService" address="http://localhost:8080/crm/cxf/customer"-->
+    <!--serviceClass="cn.itcast.crm.service.ICustomerService"/>-->
+    <!-- 配置hibernate的事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!-- 配置注解扫描器 -->
+    <context:component-scan base-package="com.lxf.blog"/>
+    <!-- 配置注解解析器 -->
+    <context:annotation-config/>
+    <!-- 配置注解事务驱动 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 配置spring的自动代理 -->
+    <bean id="defaultAdvisorAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+        <!-- 该属性为 false是使用java的代理方式(接口代理), 如果是true:使用cglib代理方式(继承代理)-->
+        <property name="proxyTargetClass" value="false"/>
+    </bean>
+</beans>
