@@ -13,21 +13,16 @@
         <fastjson.version>1.1.41</fastjson.version>
         <springVersion>4.3.18.RELEASE</springVersion>
         <hibernateVersion>4.3.5.Final</hibernateVersion>
-        <jstlVersion>1.2</jstlVersion>
+        <!--<jstlVersion>1.2</jstlVersion>
         <taglibVersion>1.1.2</taglibVersion>
-        <servletVersion>3.0-alpha-1</servletVersion>
-        <jsonVersion>1.9.13</jsonVersion>
-        <jacksonVersion>2.5.0</jacksonVersion>
+        <servletVersion>3.0-alpha-1</servletVersion>-->
         <mysqlVersion>5.1.38</mysqlVersion>
         <c3p0Version>0.9.1.2</c3p0Version>
         <log4jVersion>1.2.17</log4jVersion>
-        <fileuploadVersion>1.3.1</fileuploadVersion>
-        <lombokVersion>1.16.10</lombokVersion>
+<!--        <lombokVersion>1.16.10</lombokVersion>
         <swagger.version>1.5.8</swagger.version>
-        <io.springfox.version>2.5.0</io.springfox.version>
+        <io.springfox.version>2.5.0</io.springfox.version>-->
         <aspectj.version>1.6.11</aspectj.version>
-        <junit.version>4.11</junit.version>
-
         <cxf.version>2.2.3</cxf.version>
 
         <spring.version>3.2.3.RELEASE</spring.version>
@@ -87,8 +82,8 @@
             <version>${hibernateVersion}</version>
         </dependency>
 
-        <!-- jsp页面使用的jstl支持-->
-        <dependency>
+        <!-- jsp页面使用的jstl支持(提供jsp标签优化)-->
+        <!--<dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstlVersion}</version>
@@ -103,7 +98,7 @@
             <artifactId>servlet-api</artifactId>
             <version>${servletVersion}</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <!-- DataBase数据库连接 mysql包-->
         <dependency>
@@ -128,21 +123,21 @@
         </dependency>
 
 
-        <!-- lombok插件导包-->
-        <dependency>
+        <!-- lombok插件导包（通过注解为pojo生成set,get,toString等方法  ）-->
+        <!--<dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombokVersion}</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
         <!--阿里巴巴json-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
-        <!-- swagger-mvc  start -->
-        <dependency>
+        <!-- swagger-mvc（其依赖json包，提供注解直接解析接口，测试接口，使用需配置swaggerConfig.java并注入spring -->
+        <!--<dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>2.6.0</version>
@@ -151,7 +146,7 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.6.0</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -167,28 +162,27 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.8.11</version>
         </dependency>
-        <!--swagger  end -->
+        <!--使用AspectJ方式注解需要相应的包-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
-        <!--使用AspectJ方式注解需要相应的包-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
-
+        <!--poi-ooxml用于读取excel-->
         <dependency><groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>3.5-FINAL</version>
         </dependency>
 
 
-        <!-- CXF Dependencies -->
+        <!-- CXF Dependencies （webservice发布与调用）-->
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
             <version>${cxf.version}</version>
@@ -198,7 +192,7 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${cxf.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- Jetty is needed if you're are not using the CXFServlet -->
 
