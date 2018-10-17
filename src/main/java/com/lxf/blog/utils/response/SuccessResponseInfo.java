@@ -1,4 +1,4 @@
-package com.lxf.blog.model;
+package com.lxf.blog.utils.response;
 
 /**
  * @ClassName: SuccessResponseInfo
