@@ -1,4 +1,4 @@
-package com.lxf.blog.model.response;
+package com.lxf.blog.model;
 
 import java.util.HashMap;
 import java.util.Map;
