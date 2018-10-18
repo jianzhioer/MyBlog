@@ -17,6 +17,7 @@ public class CommentEntity {
     private String content;
     private String mailAddress;
     private String ip;
+    private String comName;
 
     public String getArticleId() {
         return articleId;
@@ -64,5 +65,13 @@ public class CommentEntity {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getComName() {
+        return comName;
+    }
+
+    public void setComName(String comName) {
+        this.comName = comName;
     }
 }

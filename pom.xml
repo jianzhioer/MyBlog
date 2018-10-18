@@ -178,7 +178,12 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.5-FINAL</version>
         </dependency>
-
+        <!--JPA-->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
 
         <!-- CXF Dependencies （webservice发布与调用）-->
 
