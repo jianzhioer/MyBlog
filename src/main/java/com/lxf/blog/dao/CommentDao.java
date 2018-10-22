@@ -1,5 +1,9 @@
 package com.lxf.blog.dao;
 
+import com.lxf.blog.dao.base.BaseDao;
+import com.lxf.blog.entity.CommentEntity;
+import org.springframework.stereotype.Repository;
+
 /**
  * @ClassName: CommentDao
  * @Description: TODO
@@ -7,6 +11,9 @@ package com.lxf.blog.dao;
  * @CreateDate: 18-10-18
  * @Version: 1.0
  */
-
-public class CommentDao {
+@Repository
+public class CommentDao extends BaseDao<CommentEntity,String> {
+    public CommentDao(){
+        super(CommentEntity.class);
+    }
 }

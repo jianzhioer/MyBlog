@@ -1,5 +1,9 @@
 package com.lxf.blog.dao;
 
+import com.lxf.blog.dao.base.BaseDao;
+import com.lxf.blog.entity.UserEntity;
+import org.springframework.stereotype.Repository;
+
 /**
  * @ClassName: UserDao
  * @Description: TODO
@@ -7,6 +11,9 @@ package com.lxf.blog.dao;
  * @CreateDate: 18-10-18
  * @Version: 1.0
  */
-
-public class UserDao {
+@Repository
+public class UserDao extends BaseDao<UserEntity,String> {
+    public UserDao(){
+        super(UserEntity.class);
+    }
 }
