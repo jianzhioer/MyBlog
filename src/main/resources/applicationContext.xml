@@ -3,8 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.1.0"
+       xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
@@ -14,7 +15,7 @@
 						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx.xsd
 						http://cxf.apache.org/jaxws
-						http://cxf.apache.org/schemas/jaxws.xsd">
+						http://cxf.apache.org/schemas/jaxws.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.lxf.blog">
@@ -38,44 +39,74 @@
         <property name="initialPoolSize" value="10" />      <!--初始化连接池内的数据库连接-->
         <property name="maxIdleTime" value="10" />  <!--最大空闲时间-->
     </bean>
+    <!-- 配置 JPA 的 EntityManagerFactory -->
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="packagesToScan" value="com.lxf.blog.entity"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
 
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+            </props>
+        </property>
+        <property name="sharedCacheMode" value="ENABLE_SELECTIVE"/>
+    </bean>
+
+    <!-- 配置事务 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
     <!--配置session工厂-->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+<!--    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" value="com.lxf.blog.entity" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> <!--hibernate根据实体自动生成数据库表-->
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>   <!--指定数据库方言-->
-                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>     <!--在控制台显示执行的数据库操作语句-->
-                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>     <!--在控制台显示执行的数据库操作语句（格式）-->
-                <!--<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>-->
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> &lt;!&ndash;hibernate根据实体自动生成数据库表&ndash;&gt;
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>   &lt;!&ndash;指定数据库方言&ndash;&gt;
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>     &lt;!&ndash;在控制台显示执行的数据库操作语句&ndash;&gt;
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>     &lt;!&ndash;在控制台显示执行的数据库操作语句（格式）&ndash;&gt;
+                &lt;!&ndash;<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>&ndash;&gt;
             </props>
 
         </property>
 
 
-    </bean>
+    </bean>-->
     <!-- 配置HibernateTemplate模板 -->
-    <bean name="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" >
+<!--    <bean name="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" >
         <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+    </bean>-->
 
     <!-- crm客户端配置 -->
     <!--<jaxws:client id="customerService" address="http://localhost:8080/crm/cxf/customer"-->
     <!--serviceClass="cn.itcast.crm.service.ICustomerService"/>-->
     <!-- 配置hibernate的事务管理器 -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="dataSource" ref="dataSource"/>
         <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+    </bean>&ndash;&gt;-->
+    <!-- 配置注解事务驱动 (引入问题：不能注入实现类)-->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/> -->
     <!-- 配置注解扫描器 -->
-    <context:component-scan base-package="com.lxf.blog"/>
+    <context:component-scan base-package="com.lxf.blog" />
     <!-- 配置注解解析器 -->
     <context:annotation-config/>
-    <!-- 配置注解事务驱动 -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-
+    <!--定时任务-->
+    <!--<task:annotation-driven/>-->
+    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
     <!-- 配置spring的自动代理 -->
     <bean id="defaultAdvisorAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
         <!-- 该属性为 false是使用java的代理方式(接口代理), 如果是true:使用cglib代理方式(继承代理)-->

@@ -5,6 +5,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,10 +21,8 @@ import java.util.List;
  */
 @Repository
 public class BaseDao<T,PK extends Serializable> {
-
-    @Resource
-    private SessionFactory sessionFactory;
-
+    @PersistenceContext(unitName = "entityManagerFactory")
+    public EntityManager em;
     private Class<T> clazz;
 
     public BaseDao() {
@@ -29,42 +31,74 @@ public class BaseDao<T,PK extends Serializable> {
     public BaseDao(Class<T> clazz) {
         this.clazz = clazz;
     }
-    public Session getCurrentSession() {
-        return this.sessionFactory.getCurrentSession();
+
+    /**
+     * @return the em
+     */
+    public EntityManager getEm() {
+        return em;
     }
+
+    /**
+     * @param em the em to set
+     */
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    public T create(T object) {
+        em.persist(object);
+        em.flush();
+        return object;
+    }
+
+    public void removeById(PK id) {
+        T obj = get(id);
+        if (null != obj) {
+            remove(obj);
+        }
+    }
+
+    public void remove(T object) {
+        em.remove(em.merge(object));
+    }
+
+    public T createOrUpdate(T object) {
+        em.merge(object);
+        em.flush();
+        return object;
+    }
+
+    public T get(PK id) {
+        return em.find(clazz, id);
+    }
+
+    public List<T> getAll() {
+        CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(clazz);
+        return em.createQuery(query.select(query.from(clazz))).getResultList();
+    }
+
+    public void removeAll() {
+        List<T> entities = getAll();
+        for (T entity : entities) {
+            remove(entity);
+        }
+    }
+
+    public void update(T object) {
+        em.merge(object);
+        em.flush();
+    }
+
     @SuppressWarnings("unchecked")
-    public T load(Long id) {
-        return (T) getCurrentSession().load(clazz,id);
-    }
-    @SuppressWarnings("unchecked")
-    public T get(Long id) {
-        return (T) getCurrentSession().get(clazz,id);
-    }
+    protected T getSingleResult(Query query) {
+        List<T> resultList =  query.getResultList();
+        T result = null;
+        if (!resultList.isEmpty()) {
+            result = resultList.get(0);
+        }
 
-    public List<T> findAll() {
-        return null;
+        return result;
     }
 
-    public void persist(T object) {
-        getCurrentSession().persist(object);
-    }
-
-    public Long save(T object) {
-        return (Long)getCurrentSession().save(object);
-    }
-
-    public void saveOrUpdate(T object) {
-        getCurrentSession().saveOrUpdate(object);
-
-    }
-
-    public void delete(Long id) {
-        T object = load(id);
-        getCurrentSession().delete(object);
-    }
-
-    public void flush() {
-        getCurrentSession().flush();
-
-    }
 }
