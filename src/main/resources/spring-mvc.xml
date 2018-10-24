@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
@@ -60,6 +61,31 @@
     <!--<mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>-->
     <mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>
     <mvc:resources location="classpath:/META-INF/resources/webjars/" mapping="/webjars/**"/>
-
+    <!--事务-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    <!-- 事务通知 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager" >
+        <tx:attributes>
+            <tx:method name="sav*" propagation="REQUIRED" rollback-for="Exception" /> <!-- rollback-for回滚事物，果存在一个事务，则支撑当前事务。若是没有事务则开启 -->
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="updat*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="qry*" propagation="NOT_SUPPORTED" read-only="true"/>
+            <tx:method name="add" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="create*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="increment*" propagation="REQUIRED" rollback-for="Exception" />
+            <tx:method name="query*" propagation="SUPPORTS" rollback-for="Exception" />
+            <tx:method name="get*" propagation="SUPPORTS" rollback-for="Exception" />
+            <tx:method name="*" propagation="SUPPORTS" rollback-for="Exception" />
+        </tx:attributes>
+    </tx:advice>
     <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:config >
+    <aop:pointcut id="cut"
+                  expression="execution(* com.lxf.blog.service.*.*(..))" />
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="cut" />
+</aop:config>
 </beans>

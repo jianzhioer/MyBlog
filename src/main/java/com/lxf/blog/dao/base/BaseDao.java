@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Repository
 public class BaseDao<T,PK extends Serializable> {
-    @PersistenceContext(unitName = "entityManagerFactory")
+    //@PersistenceContext(unitName = "entityManagerFactory")
     public EntityManager em;
     private Class<T> clazz;
 

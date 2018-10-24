@@ -11,7 +11,8 @@
     <name>blog</name>
     <properties>
         <fastjson.version>1.1.41</fastjson.version>
-        <springVersion>4.3.18.RELEASE</springVersion>
+        <!--<springVersion>4.3.18.RELEASE</springVersion>-->
+        <springVersion>3.1.4.RELEASE</springVersion>
         <hibernateVersion>4.3.5.Final</hibernateVersion>
         <!--<jstlVersion>1.2</jstlVersion>
         <taglibVersion>1.1.2</taglibVersion>
