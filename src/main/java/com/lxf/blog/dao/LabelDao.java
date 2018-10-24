@@ -1,6 +1,7 @@
 package com.lxf.blog.dao;
 
 import com.lxf.blog.dao.base.BaseDao;
+import com.lxf.blog.entity.LabelEntity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Repository;
  * @Version: 1.0
  */
 @Repository
-public class LabelEntity extends BaseDao<LabelEntity,String> {
-    public LabelEntity(){
+public class LabelDao extends BaseDao<LabelEntity,String> {
+    public LabelDao(){
         super(LabelEntity.class);
     }
 }
