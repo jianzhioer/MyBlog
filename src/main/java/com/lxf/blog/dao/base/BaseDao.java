@@ -3,6 +3,7 @@ package com.lxf.blog.dao.base;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -33,11 +34,11 @@ public class BaseDao<T,PK extends Serializable> {
         return this.sessionFactory.getCurrentSession();
     }
     @SuppressWarnings("unchecked")
-    public T load(Long id) {
+    public T load(PK id) {
         return (T) getCurrentSession().load(clazz,id);
     }
     @SuppressWarnings("unchecked")
-    public T get(Long id) {
+    public T get(PK id) {
         return (T) getCurrentSession().get(clazz,id);
     }
 
@@ -58,7 +59,7 @@ public class BaseDao<T,PK extends Serializable> {
 
     }
 
-    public void delete(Long id) {
+    public void delete(PK id) {
         T object = load(id);
         getCurrentSession().delete(object);
     }

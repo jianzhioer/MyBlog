@@ -17,4 +17,8 @@ public class ArticleDao extends BaseDao<ArticleEntity, String> {
     public ArticleDao() {
         super(ArticleEntity.class);
     }
+    public ArticleEntity get(String id){
+        return super.get(id);
+
+    }
 }

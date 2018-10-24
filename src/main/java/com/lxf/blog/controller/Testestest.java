@@ -1,6 +1,5 @@
 package com.lxf.blog.controller;
 
-import com.lxf.blog.dao.ArticleDao;
 import com.lxf.blog.entity.ArticleEntity;
 import com.lxf.blog.service.TestService;
 import com.lxf.blog.utils.response.ResponseInfo;
@@ -34,7 +33,7 @@ public class Testestest {
 
 
         try{
-            String articleEntity = testService.getID("1231646");
+            ArticleEntity articleEntity = testService.getID("1234");
             return ResponseInfo.createSuccessResponse(articleEntity);
         } catch (Exception e) {
             e.getStackTrace();
