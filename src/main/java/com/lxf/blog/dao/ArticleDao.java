@@ -21,4 +21,8 @@ public class ArticleDao extends BaseDao<ArticleEntity, String> {
         return super.get(id);
 
     }
+    public boolean update(ArticleEntity articleEntity){
+        super.saveOrUpdate(articleEntity);
+        return false;
+    }
 }

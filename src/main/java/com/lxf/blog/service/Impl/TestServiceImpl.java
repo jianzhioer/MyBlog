@@ -25,10 +25,10 @@ public class TestServiceImpl implements TestService {
         return articleDao.get(id);
     }
 
-    public ArticleEntity update(String id){
+    public boolean update(String id){
         ArticleEntity articleEntity = new ArticleEntity();
         articleEntity.setTitle("5522222");
         articleEntity.setArticleId(id);
-        return articleEntity;
+        return articleDao.update(articleEntity);
     }
 }
