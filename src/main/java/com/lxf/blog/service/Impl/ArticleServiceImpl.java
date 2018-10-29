@@ -33,6 +33,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public ArticleInfo getArticle(String articleId) {
+        return null;
+    }
+
+    @Override
     public boolean createArticle(ArticleInfo articleInfo) {
         return false;
     }

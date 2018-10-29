@@ -1,5 +1,7 @@
 package com.lxf.blog.entity;
 
+import com.lxf.blog.model.ArticleInfo;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +17,6 @@ public class ArticleEntity {
     private String title;
     @Column(name = "abstracts",columnDefinition = "text")
     private String abstracts;//摘要
-    private String keywordId;
     private String labelId;
     private String createTime;
     @Column(name = "context",columnDefinition = "longtext")
@@ -45,14 +46,6 @@ public class ArticleEntity {
 
     public void setAbstracts(String abstracts) {
         this.abstracts = abstracts;
-    }
-
-    public String getKeywordId() {
-        return keywordId;
-    }
-
-    public void setKeywordId(String keywordId) {
-        this.keywordId = keywordId;
     }
 
     public String getLabelId() {
@@ -93,5 +86,18 @@ public class ArticleEntity {
 
     public void setCommentNum(int commentNum) {
         this.commentNum = commentNum;
+    }
+
+    public ArticleEntity transformArticleInfo(ArticleInfo articleInfo){
+        ArticleEntity articleEntity = new ArticleEntity();
+        articleEntity.setTitle(articleInfo.getTitle());
+        articleEntity.setArticleId(articleInfo.getArticleId());
+        articleEntity.setAbstracts(articleInfo.getArticleId());
+        articleEntity.setCommentNum(articleInfo.getCommentNum());
+        articleEntity.setContext(articleInfo.getContext());
+        articleEntity.setLabelId(articleInfo.getLabel());
+        articleEntity.setClickNum(articleInfo.getClickNum());
+        articleEntity.setCreateTime(articleInfo.getCreateTime());
+        return articleEntity;
     }
 }

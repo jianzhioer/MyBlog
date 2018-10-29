@@ -13,7 +13,30 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class UserDao extends BaseDao<UserEntity,String> {
+
     public UserDao(){
         super(UserEntity.class);
     }
+
+    @Override
+    public UserEntity get(String id) {
+        return super.get(id);
+    }
+
+    @Override
+    public void save(UserEntity object) {
+        super.save(object);
+    }
+
+    @Override
+    public void update(UserEntity object) {
+        super.update(object);
+    }
+
+    @Override
+    public void delete(String id) {
+        super.delete(id);
+    }
+
+
 }

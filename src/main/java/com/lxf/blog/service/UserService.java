@@ -1,7 +1,6 @@
 package com.lxf.blog.service;
 
 import com.lxf.blog.entity.UserEntity;
-import com.lxf.blog.model.UserInfo;
 
 /**
  * @ClassName: UserService
@@ -12,9 +11,9 @@ import com.lxf.blog.model.UserInfo;
  */
 
 public interface UserService {
-    UserInfo getUserInfo();
-    boolean createUserInfo(UserInfo userInfo);
-    boolean updateUserInfo(UserInfo userInfo);
+    UserEntity getUserInfo();
+    boolean createUserInfo(UserEntity userInfo);
+    boolean updateUserInfo(UserEntity userInfo);
     boolean deleteUserInfo(String userId);
     boolean checkoutUserInfo(UserEntity userEntity);//登录检查接口
 }

@@ -33,10 +33,10 @@ public class Testestest {
 
 
         try{
-            boolean articleEntity = testService.update("1234");
-            return ResponseInfo.createSuccessResponse(articleEntity);
+           // boolean articleEntity = testService.update("1234");
+            return ResponseInfo.createSuccessResponse(testService.getID("2"));
         } catch (Exception e) {
-            e.getStackTrace();
+            e.printStackTrace();
             return ResponseInfo.createFailedResponse("失败");
         }
     }

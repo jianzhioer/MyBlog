@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: TestService
@@ -22,7 +23,7 @@ public class TestServiceImpl implements TestService {
     ArticleDao articleDao;
     @Override
     public ArticleEntity getID(String id){
-        return articleDao.get(id);
+        return articleDao.test(1,1);
     }
 
     public boolean update(String id){

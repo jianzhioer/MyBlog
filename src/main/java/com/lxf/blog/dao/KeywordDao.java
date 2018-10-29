@@ -13,7 +13,28 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class KeywordDao extends BaseDao<KeywordEntity,String>{
+
     public KeywordDao(){
         super(KeywordEntity.class);
+    }
+
+    @Override
+    public KeywordEntity get(String id) {
+        return super.get(id);
+    }
+
+    @Override
+    public void save(KeywordEntity object) {
+        super.save(object);
+    }
+
+    @Override
+    public void update(KeywordEntity object) {
+        super.update(object);
+    }
+
+    @Override
+    public void delete(String id) {
+        super.delete(id);
     }
 }

@@ -50,13 +50,12 @@ public class BaseDao<T,PK extends Serializable> {
         getCurrentSession().persist(object);
     }
 
-    public Long save(T object) {
-        return (Long)getCurrentSession().save(object);
+    public void save(T object) {
+        getCurrentSession().save(object);
     }
 
-    public void saveOrUpdate(T object) {
-        getCurrentSession().saveOrUpdate(object);
-
+    public void update(T object) {
+        getCurrentSession().update(object);
     }
 
     public void delete(PK id) {

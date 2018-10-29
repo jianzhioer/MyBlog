@@ -13,7 +13,28 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class CommentDao extends BaseDao<CommentEntity,String> {
+
     public CommentDao(){
         super(CommentEntity.class);
+    }
+
+    @Override
+    public CommentEntity get(String id) {
+        return super.get(id);
+    }
+
+    @Override
+    public void save(CommentEntity object) {
+        super.save(object);
+    }
+
+    @Override
+    public void update(CommentEntity object) {
+        super.update(object);
+    }
+
+    @Override
+    public void delete(String id) {
+        super.delete(id);
     }
 }

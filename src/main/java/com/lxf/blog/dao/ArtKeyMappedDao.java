@@ -13,7 +13,28 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ArtKeyMappedDao extends BaseDao<ArtKeyMappedEntity,String> {
+
     public ArtKeyMappedDao() {
         super(ArtKeyMappedEntity.class);
+    }
+
+    @Override
+    public ArtKeyMappedEntity get(String id) {
+        return super.get(id);
+    }
+
+    @Override
+    public void save(ArtKeyMappedEntity object) {
+        super.save(object);
+    }
+
+    @Override
+    public void update(ArtKeyMappedEntity object) {
+        super.update(object);
+    }
+
+    @Override
+    public void delete(String id) {
+        super.delete(id);
     }
 }

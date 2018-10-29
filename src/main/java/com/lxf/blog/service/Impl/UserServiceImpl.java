@@ -1,7 +1,6 @@
 package com.lxf.blog.service.Impl;
 
 import com.lxf.blog.entity.UserEntity;
-import com.lxf.blog.model.UserInfo;
 import com.lxf.blog.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,17 +16,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
     @Override
-    public UserInfo getUserInfo() {
+    public UserEntity getUserInfo() {
         return null;
     }
 
     @Override
-    public boolean createUserInfo(UserInfo userInfo) {
+    public boolean createUserInfo(UserEntity userInfo) {
         return false;
     }
 
     @Override
-    public boolean updateUserInfo(UserInfo userInfo) {
+    public boolean updateUserInfo(UserEntity userInfo) {
         return false;
     }
 
