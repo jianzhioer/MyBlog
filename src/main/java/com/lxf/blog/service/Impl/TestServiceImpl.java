@@ -38,7 +38,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public List<ArtKeyMappedEntity> testQueryList(String id) {
+    public List<String> testQueryList(String id) {
         return artKeyMappedDao.getKeywordListByArticleId(id);
     }
 }

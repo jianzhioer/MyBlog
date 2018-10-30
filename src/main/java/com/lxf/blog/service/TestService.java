@@ -8,5 +8,5 @@ import java.util.List;
 public interface TestService  {
     ArticleEntity getID(String id);
     boolean update(String id);
-    List<ArtKeyMappedEntity> testQueryList(String id);
+    List<String> testQueryList(String id);
 }
