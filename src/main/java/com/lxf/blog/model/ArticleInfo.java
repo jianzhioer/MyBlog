@@ -16,7 +16,7 @@ public class ArticleInfo {
     private String title;
     private String abstracts;//摘要
     private List<String> keywordList;
-    private String label;
+    private LabelType label;
     private String createTime;
     private String context;
     private int clickNum;
@@ -54,11 +54,11 @@ public class ArticleInfo {
         this.keywordList = keywordList;
     }
 
-    public String getLabel() {
+    public LabelType getLabel() {
         return label;
     }
 
-    public void setLabel(String label) {
+    public void setLabel(LabelType label) {
         this.label = label;
     }
 

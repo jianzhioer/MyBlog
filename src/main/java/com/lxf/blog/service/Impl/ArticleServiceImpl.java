@@ -1,10 +1,13 @@
 package com.lxf.blog.service.Impl;
 
+import com.lxf.blog.dao.ArtKeyMappedDao;
+import com.lxf.blog.dao.ArticleDao;
 import com.lxf.blog.model.ArticleInfo;
 import com.lxf.blog.service.ArticleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,6 +20,13 @@ import java.util.List;
 @Service
 @Transactional
 public class ArticleServiceImpl implements ArticleService {
+
+    @Resource
+    ArticleDao articleDao;
+
+    @Resource
+    ArtKeyMappedDao artKeyMappedDao;
+
     @Override
     public List<ArticleInfo> getAllArticle(int pageSize, int pageNum) {
         return null;

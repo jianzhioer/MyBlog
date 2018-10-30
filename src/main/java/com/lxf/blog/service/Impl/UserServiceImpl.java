@@ -1,9 +1,12 @@
 package com.lxf.blog.service.Impl;
 
+import com.lxf.blog.dao.UserDao;
 import com.lxf.blog.entity.UserEntity;
 import com.lxf.blog.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 /**
  * @ClassName: UserServiceImpl
@@ -15,6 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    @Resource
+    UserDao userDao;
+
     @Override
     public UserEntity getUserInfo() {
         return null;

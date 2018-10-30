@@ -1,9 +1,11 @@
 package com.lxf.blog.service.Impl;
 
+import com.lxf.blog.dao.KeywordDao;
 import com.lxf.blog.service.KeywordService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,6 +18,10 @@ import java.util.List;
 @Service
 @Transactional
 public class KeywordServiceImpl implements KeywordService {
+
+    @Resource
+    KeywordDao keywordDao;
+
     @Override
     public boolean createKeyword(String keyword) {
         return false;

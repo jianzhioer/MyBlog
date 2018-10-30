@@ -1,6 +1,7 @@
 package com.lxf.blog.entity;
 
 import com.lxf.blog.model.ArticleInfo;
+import com.lxf.blog.model.LabelType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ public class ArticleEntity {
     private String title;
     @Column(name = "abstracts",columnDefinition = "text")
     private String abstracts;//摘要
-    private String labelId;
+    private LabelType labelType;
     private String createTime;
     @Column(name = "context",columnDefinition = "longtext")
     private String context;
@@ -48,12 +49,12 @@ public class ArticleEntity {
         this.abstracts = abstracts;
     }
 
-    public String getLabelId() {
-        return labelId;
+    public LabelType getLabelType() {
+        return labelType;
     }
 
-    public void setLabelId(String labelId) {
-        this.labelId = labelId;
+    public void setLabelType(LabelType labelType) {
+        this.labelType = labelType;
     }
 
     public String getCreateTime() {
@@ -95,7 +96,7 @@ public class ArticleEntity {
         articleEntity.setAbstracts(articleInfo.getArticleId());
         articleEntity.setCommentNum(articleInfo.getCommentNum());
         articleEntity.setContext(articleInfo.getContext());
-        articleEntity.setLabelId(articleInfo.getLabel());
+        articleEntity.setLabelType(articleInfo.getLabel());
         articleEntity.setClickNum(articleInfo.getClickNum());
         articleEntity.setCreateTime(articleInfo.getCreateTime());
         return articleEntity;

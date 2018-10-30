@@ -1,10 +1,12 @@
 package com.lxf.blog.service.Impl;
 
+import com.lxf.blog.dao.CommentDao;
 import com.lxf.blog.entity.CommentEntity;
 import com.lxf.blog.service.CommentService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -17,6 +19,10 @@ import java.util.List;
 @Service
 @Transactional
 public class CommentServiceImpl implements CommentService {
+
+    @Resource
+    CommentDao commentDao;
+
     @Override
     public boolean createComment(CommentEntity commentEntity) {
         return false;
