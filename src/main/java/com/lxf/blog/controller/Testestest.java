@@ -1,6 +1,5 @@
 package com.lxf.blog.controller;
 
-import com.lxf.blog.entity.ArticleEntity;
 import com.lxf.blog.service.TestService;
 import com.lxf.blog.utils.response.ResponseInfo;
 import org.springframework.stereotype.Controller;

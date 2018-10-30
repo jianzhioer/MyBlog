@@ -5,9 +5,7 @@ import com.lxf.blog.entity.ArticleEntity;
 import com.lxf.blog.service.TestService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * @ClassName: TestService
@@ -30,6 +28,7 @@ public class TestServiceImpl implements TestService {
         ArticleEntity articleEntity = new ArticleEntity();
         articleEntity.setTitle("5522222");
         articleEntity.setArticleId(id);
-        return articleDao.update(articleEntity);
+        articleDao.update(articleEntity);
+        return false;
     }
 }
