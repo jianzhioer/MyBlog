@@ -2,7 +2,10 @@ package com.lxf.blog.dao;
 
 import com.lxf.blog.dao.base.BaseDao;
 import com.lxf.blog.entity.KeywordEntity;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @ClassName: KeywordDao
@@ -36,5 +39,11 @@ public class KeywordDao extends BaseDao<KeywordEntity,String>{
     @Override
     public void delete(String id) {
         super.delete(id);
+    }
+
+    public List<String> getKeywordList(){
+        String hql = "SELECT value FROM KeywordEntity";
+        Query query = getCurrentSession().createQuery(hql);
+        return query.list();
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName: CommentServiceImpl
@@ -24,22 +25,23 @@ public class CommentServiceImpl implements CommentService {
     CommentDao commentDao;
 
     @Override
-    public boolean createComment(CommentEntity commentEntity) {
-        return false;
+    public void createComment(CommentEntity commentEntity) {
+        commentEntity.setCommentId(UUID.randomUUID().toString());
+        commentDao.save(commentEntity);
     }
 
     @Override
-    public boolean deleteComment(String commentId) {
-        return false;
+    public void deleteComment(String commentId) {
+        commentDao.delete(commentId);
     }
 
     @Override
-    public boolean updateComment(CommentEntity commentEntity) {
-        return false;
+    public void updateComment(CommentEntity commentEntity) {
+        commentDao.update(commentEntity);
     }
 
     @Override
-    public List<CommentEntity> getCommentList(int pageSize, int pageNum) {
-        return null;
+    public List<CommentEntity> getCommentList(int pageSize, int pageNum ,String articleId) {
+        return commentDao.getCommentListByArticleId(articleId);
     }
 }

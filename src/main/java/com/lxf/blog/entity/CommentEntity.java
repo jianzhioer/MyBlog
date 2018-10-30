@@ -12,7 +12,7 @@ public class CommentEntity {
     private String articleId;
     private String commentTime;
     @Id
-    private String commentID;
+    private String commentId;
     @Column(name = "content",columnDefinition = "text")
     private String content;
     private String mailAddress;
@@ -35,12 +35,12 @@ public class CommentEntity {
         this.commentTime = commentTime;
     }
 
-    public String getCommentID() {
-        return commentID;
+    public String getCommentId() {
+        return commentId;
     }
 
-    public void setCommentID(String commentID) {
-        this.commentID = commentID;
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
     }
 
     public String getContent() {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * @ClassName: UserServiceImpl
@@ -23,27 +24,32 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public UserEntity getUserInfo() {
-        return null;
+    public UserEntity getUserInfo(String userId) {
+        UserEntity userEntity = userDao.get(userId);
+        userEntity.setPassword("********");
+        return userEntity;
     }
 
     @Override
-    public boolean createUserInfo(UserEntity userInfo) {
-        return false;
+    public void createUserInfo(UserEntity userInfo) {
+        userInfo.setUserId(UUID.randomUUID().toString());
+        userDao.save(userInfo);
     }
 
     @Override
-    public boolean updateUserInfo(UserEntity userInfo) {
-        return false;
+    public void updateUserInfo(UserEntity userInfo) {
+        userDao.update(userInfo);
     }
 
     @Override
-    public boolean deleteUserInfo(String userId) {
-        return false;
+    public void deleteUserInfo(String userId) {
+        userDao.delete(userId);
     }
 
     @Override
     public boolean checkoutUserInfo(UserEntity userEntity) {
-        return false;
+        UserEntity userEntityInDb = new UserEntity();
+        userEntityInDb = userDao.getUserEntityByName(userEntity.getUsername());
+        return userEntityInDb.equals(userEntity);
     }
 }

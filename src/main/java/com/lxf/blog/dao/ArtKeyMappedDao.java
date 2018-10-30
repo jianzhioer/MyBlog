@@ -2,7 +2,10 @@ package com.lxf.blog.dao;
 
 import com.lxf.blog.dao.base.BaseDao;
 import com.lxf.blog.entity.ArtKeyMappedEntity;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @ClassName: ArtKeyMappedDao
@@ -36,5 +39,19 @@ public class ArtKeyMappedDao extends BaseDao<ArtKeyMappedEntity,String> {
     @Override
     public void delete(String id) {
         super.delete(id);
+    }
+
+    public List<String> getKeywordListByArticleId(String articleId){
+        String hql = "SELECT keywordName FROM ArtKeyMappedEntity A WHERE A.articleId = :artId";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setParameter("artId",articleId);
+        return query.list();
+    }
+
+    public List<String> getArticleListByKeywordName(String keywordName){
+        String hql = "SELECT articleId FROM ArtKeyMappedEntity A WHERE A.keywordName = :keyName";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setParameter("keyName",keywordName);
+        return query.list();
     }
 }

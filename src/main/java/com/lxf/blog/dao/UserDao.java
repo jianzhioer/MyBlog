@@ -2,6 +2,7 @@ package com.lxf.blog.dao;
 
 import com.lxf.blog.dao.base.BaseDao;
 import com.lxf.blog.entity.UserEntity;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -38,5 +39,10 @@ public class UserDao extends BaseDao<UserEntity,String> {
         super.delete(id);
     }
 
-
+    public UserEntity getUserEntityByName(String userName){
+        String hql = "SELECT U FROM UserEntity U WHERE U.username = :userName";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setParameter("userName",userName);
+        return (UserEntity) query.uniqueResult();
+    }
 }

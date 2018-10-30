@@ -89,7 +89,7 @@ public class ArticleEntity {
         this.commentNum = commentNum;
     }
 
-    public ArticleEntity transformArticleInfo(ArticleInfo articleInfo){
+    public ArticleEntity transFromArticleInfo(ArticleInfo articleInfo){
         ArticleEntity articleEntity = new ArticleEntity();
         articleEntity.setTitle(articleInfo.getTitle());
         articleEntity.setArticleId(articleInfo.getArticleId());

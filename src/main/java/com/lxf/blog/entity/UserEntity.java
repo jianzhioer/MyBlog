@@ -8,17 +8,17 @@ import javax.persistence.Table;
 @Table(name = "t_user")
 public class UserEntity {
     @Id
-    private String userID;
+    private String userId;
     private String username;
     private String password;
     private String createTime;
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -43,5 +43,21 @@ public class UserEntity {
 
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        UserEntity userEntity = (UserEntity) obj;
+        if (!username.equals(userEntity.username)) return false;
+        return password.equals(userEntity.password);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = username.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
     }
 }

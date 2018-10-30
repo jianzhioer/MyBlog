@@ -8,15 +8,15 @@ import javax.persistence.Table;
 @Table(name = "t_keyword")
 public class KeywordEntity {
     @Id
-    private String keywordID;
+    private String keywordId;
     private String value;
 
-    public String getKeywordID() {
-        return keywordID;
+    public String getKeywordId() {
+        return keywordId;
     }
 
-    public void setKeywordID(String keywordID) {
-        this.keywordID = keywordID;
+    public void setKeywordId(String keywordId) {
+        this.keywordId = keywordId;
     }
 
     public String getValue() {

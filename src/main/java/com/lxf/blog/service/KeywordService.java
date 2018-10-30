@@ -1,11 +1,13 @@
 package com.lxf.blog.service;
 
 
+import com.lxf.blog.entity.KeywordEntity;
+
 import java.util.List;
 
 public interface KeywordService {
-    boolean createKeyword(String keyword);
-    boolean deleteKeyword(String Keyword);
-    boolean updateKeyword(String Keyword);
+    void createKeyword(String keyword);
+    void deleteKeyword(String keywordId);
+    void updateKeyword(KeywordEntity keywordEntity);
     List<String> getKeywordList();
 }

@@ -2,7 +2,10 @@ package com.lxf.blog.dao;
 
 import com.lxf.blog.dao.base.BaseDao;
 import com.lxf.blog.entity.CommentEntity;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @ClassName: CommentDao
@@ -36,5 +39,12 @@ public class CommentDao extends BaseDao<CommentEntity,String> {
     @Override
     public void delete(String id) {
         super.delete(id);
+    }
+
+    public List<CommentEntity> getCommentListByArticleId(String articleId){
+        String hql = "SELECT C FROM CommentEntity C WHERE C.articleId := artId ORDER BY commentTime DESC";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setParameter("artId", articleId);
+        return query.list();
     }
 }

@@ -11,9 +11,9 @@ import com.lxf.blog.entity.UserEntity;
  */
 
 public interface UserService {
-    UserEntity getUserInfo();
-    boolean createUserInfo(UserEntity userInfo);
-    boolean updateUserInfo(UserEntity userInfo);
-    boolean deleteUserInfo(String userId);
+    UserEntity getUserInfo(String userId);
+    void createUserInfo(UserEntity userInfo);
+    void updateUserInfo(UserEntity userInfo);
+    void deleteUserInfo(String userId);
     boolean checkoutUserInfo(UserEntity userEntity);//登录检查接口
 }

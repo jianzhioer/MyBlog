@@ -8,25 +8,25 @@ import javax.persistence.Table;
 @Table(name = "t_artkeymap")
 public class ArtKeyMappedEntity {
 
-    private String articleID;
-    private String keywordID;
+    private String articleId;
+    private String keywordName;
     @Id
     private String id;
 
-    public String getArticleID() {
-        return articleID;
+    public String getArticleId() {
+        return articleId;
     }
 
-    public void setArticleID(String articleID) {
-        this.articleID = articleID;
+    public void setArticleId(String articleID) {
+        this.articleId = articleID;
     }
 
-    public String getKeywordID() {
-        return keywordID;
+    public String getKeywordName() {
+        return keywordName;
     }
 
-    public void setKeywordID(String keywordID) {
-        this.keywordID = keywordID;
+    public void setKeywordName(String keywordName) {
+        this.keywordName = keywordName;
     }
 
     public String getId() {

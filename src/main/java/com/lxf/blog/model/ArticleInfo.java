@@ -1,5 +1,7 @@
 package com.lxf.blog.model;
 
+import com.lxf.blog.entity.ArticleEntity;
+
 import java.util.List;
 
 /**
@@ -92,5 +94,18 @@ public class ArticleInfo {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public ArticleInfo transFromArticleEntity(ArticleEntity articleEntity){
+        ArticleInfo articleInfo = new ArticleInfo();
+        articleInfo.setAbstracts(articleEntity.getAbstracts());
+        articleInfo.setArticleId(articleEntity.getArticleId());
+        articleInfo.setClickNum(articleEntity.getClickNum());
+        articleInfo.setCommentNum(articleEntity.getCommentNum());
+        articleInfo.setContext(articleEntity.getContext());
+        articleInfo.setCreateTime(articleEntity.getCreateTime());
+        articleInfo.setLabel(articleEntity.getLabelType());
+        articleInfo.setTitle(articleEntity.getTitle());
+        return articleInfo;
     }
 }
